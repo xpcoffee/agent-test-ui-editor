@@ -54,6 +54,11 @@ const NewPage: React.FC = () => {
         setParagraphs(newParagraphs);
     };
 
+    const handleRemoveParagraph = (id: number) => {
+        const newParagraphs = paragraphs.filter(p => p.id !== id);
+        setParagraphs(newParagraphs);
+    };
+
     const handleDragEnd = (event: { active: any; over: any; }) => {
         const { active, over } = event;
 
@@ -97,6 +102,12 @@ const NewPage: React.FC = () => {
                                     onChange={(e) => handleParagraphChange(paragraph.id, e.target.value)}
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-24"
                                 />
+                                <button
+                                    onClick={() => handleRemoveParagraph(paragraph.id)}
+                                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded mt-2"
+                                >
+                                    Remove
+                                </button>
                             </div>
                         </SortableItem>
                     ))}

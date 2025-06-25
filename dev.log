@@ -4,8 +4,7 @@
 
 Port 5173 is in use, trying another one...
 
-  VITE v7.0.0  ready in 116 ms
+  VITE v7.0.0  ready in 100 ms
 
   ➜  Local:   http://localhost:5174/
   ➜  Network: use --host to expose
-10:22:57 PM [vite] (client) page reload check-browser-errors.js

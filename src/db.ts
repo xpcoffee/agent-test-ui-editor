@@ -26,3 +26,8 @@ export const getPage = async (id: number) => {
     const db = await dbPromise;
     return db.get('pages', id);
 }
+
+export const deletePage = async (id: number) => {
+    const db = await dbPromise;
+    return db.delete('pages', id);
+}

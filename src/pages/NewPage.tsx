@@ -50,6 +50,7 @@ const NewPage: React.FC = () => {
     };
 
     const handleParagraphChange = (id: number, value: string) => {
+        console.log(`Paragraph ${id} changed to: ${value}`);
         const newParagraphs = paragraphs.map(p => p.id === id ? { ...p, content: value } : p);
         setParagraphs(newParagraphs);
     };

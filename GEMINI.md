@@ -37,3 +37,7 @@ import { getPage, Page } from '../db';
 ### **4. Exercise Caution with File System Operations**
 
 Exercise extreme caution with file system modification commands like `mv` and `rm`. Before executing, double-check the source and destination paths. Never move or delete critical hidden directories like `.git` or `node_modules` unless explicitly instructed to do so after a confirmation of the consequences.
+
+### **5. Iteration Limit**
+
+If unable to fix an issue or make progress after 4 consecutive attempts, stop iterating and inform the user.

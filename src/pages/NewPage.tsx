@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
-import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from '@dnd-kit/sortable';
-import { useSortable } from '@dnd-kit/sortable';
+import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy, useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { addPage } from '../db';
 
@@ -95,20 +94,25 @@ const NewPage: React.FC = () => {
                 <SortableContext items={paragraphs.map(p => p.id)} strategy={verticalListSortingStrategy}>
                     {paragraphs.map((paragraph, index) => (
                         <SortableItem key={paragraph.id} id={paragraph.id}>
-                            <div className="mb-4">
-                                <label htmlFor={`paragraph-${paragraph.id}`} className="block text-gray-700 text-sm font-bold mb-2">Paragraph {index + 1}</label>
-                                <textarea
-                                    id={`paragraph-${paragraph.id}`}
-                                    value={paragraph.content}
-                                    onChange={(e) => handleParagraphChange(paragraph.id, e.target.value)}
-                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-24"
-                                />
-                                <button
-                                    onClick={() => handleRemoveParagraph(paragraph.id)}
-                                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded mt-2"
-                                >
-                                    Remove
-                                </button>
+                            <div className="flex items-center mb-4">
+                                <div className="cursor-move p-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" /></svg>
+                                </div>
+                                <div className="flex-grow">
+                                    <label htmlFor={`paragraph-${paragraph.id}`} className="block text-gray-700 text-sm font-bold mb-2">Paragraph {index + 1}</label>
+                                    <textarea
+                                        id={`paragraph-${paragraph.id}`}
+                                        value={paragraph.content}
+                                        onChange={(e) => handleParagraphChange(paragraph.id, e.target.value)}
+                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-24"
+                                    />
+                                    <button
+                                        onClick={() => handleRemoveParagraph(paragraph.id)}
+                                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded mt-2"
+                                    >
+                                        Remove
+                                    </button>
+                                </div>
                             </div>
                         </SortableItem>
                     ))}

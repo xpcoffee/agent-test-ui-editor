@@ -1,69 +1,114 @@
-# React + TypeScript + Vite
+# Static Site Generator and Editor UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A minimal static site generator with a WYSIWYG editor interface. This application allows users to create, edit, and manage static pages through a web interface.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### ✅ Implemented (Issue #1)
+- **Landing Page**: Displays a list of all created pages
+- **Page Creation**: WYSIWYG editor for creating new pages with:
+  - Title setting
+  - Paragraph addition and editing
+  - Drag-and-drop paragraph reordering
+  - Paragraph removal
+- **Page Viewing**: Navigate to and view previously created pages
+- **Page Management**: Delete pages from the landing page
+- **Data Persistence**: Pages stored in browser IndexedDB
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Frontend**: React 19 with TypeScript
+- **Styling**: Tailwind CSS v4
+- **Routing**: React Router DOM v7
+- **Drag & Drop**: @dnd-kit library
+- **Storage**: IndexedDB (via idb library)
+- **Build Tool**: Vite
+- **Testing**: Puppeteer for E2E tests
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Getting Started
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### Prerequisites
+- Node.js (version 18 or higher)
+- npm or yarn
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Installation
+
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+### Development
+
+Start the development server:
+```bash
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The application will be available at `http://localhost:5173`
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Building
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Build for production:
+```bash
+npm run build
 ```
+
+### Testing
+
+Run end-to-end tests:
+```bash
+npm run test:e2e
+```
+
+**Note**: The development server must be running before executing E2E tests.
+
+## Project Structure
+
+```
+src/
+├── components/         # Reusable UI components
+├── pages/             # Page components
+│   ├── NewPage.tsx    # Page creation interface
+│   └── PageView.tsx   # Page viewing interface
+├── db.ts              # IndexedDB operations
+├── router.tsx         # Application routing
+└── App.tsx            # Main application component
+```
+
+## Usage
+
+1. **Creating a Page**: Click "New Page" on the landing page to open the editor
+2. **Adding Content**: 
+   - Set a title in the title field
+   - Add paragraphs using the "Add Paragraph" button
+   - Edit paragraph content in the textarea fields
+   - Reorder paragraphs by dragging the handle (≡ icon)
+   - Remove paragraphs with the "Remove" button
+3. **Saving**: Click "Save" to store the page and navigate to it
+4. **Viewing Pages**: Click on any page title from the landing page to view it
+5. **Deleting Pages**: Use the red "Delete" button next to each page on the landing page
+
+## Development Notes
+
+- Pages are stored locally in the browser's IndexedDB
+- The drag-and-drop functionality uses @dnd-kit for accessibility and touch support
+- E2E tests use Puppeteer to simulate user interactions
+- The application follows React best practices with TypeScript for type safety
+
+## Contributing
+
+1. Follow the existing code style and patterns
+2. Add tests for new functionality
+3. Update documentation as needed
+4. Ensure all E2E tests pass before committing
+
+## Future Enhancements
+
+- Backend storage integration
+- Rich text editing capabilities
+- Image and media support
+- Page templates
+- Export functionality
+- Collaborative editing

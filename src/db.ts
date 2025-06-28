@@ -1,17 +1,33 @@
 import { openDB } from 'idb';
 
-const dbPromise = openDB('pages-db', 1, {
+export interface Page {
+    id: number;
+    title: string;
+    paragraphs: string[];
+}
+
+const dbPromise = openDB<Page>('pages-db', 1, {
   upgrade(db) {
     db.createObjectStore('pages', { keyPath: 'id', autoIncrement: true });
   },
 });
 
-export const addPage = async (page: { title: string; content: string }) => {
+export const addPage = async (page: Omit<Page, 'id'>) => {
   const db = await dbPromise;
-  await db.add('pages', page);
+  return db.add('pages', page as Page);
 };
 
 export const getAllPages = async () => {
   const db = await dbPromise;
   return db.getAll('pages');
 };
+
+export const getPage = async (id: number) => {
+    const db = await dbPromise;
+    return db.get('pages', id);
+}
+
+export const deletePage = async (id: number) => {
+    const db = await dbPromise;
+    return db.delete('pages', id);
+}
